@@ -1,10 +1,11 @@
 #!/bin/bash
 
-sudo apt update && sudo apt upgrade -y
+set -euo pipefail
+export DEBIAN_FRONTEND=noninteractive
 
-sudo apt install dkms
+apt-get update
+apt-get install -y --no-install-recommends software-properties-common apt-transport-https ca-certificates gnupg
 
-sudo apt install ufw fail2ban unattended-upgrades
-sudo dpkg-reconfigure unattended-upgrades
-
-sudo apt install -y vim
+add-apt-repository -y universe
+add-apt-repository -y multiverse
+apt-get update
