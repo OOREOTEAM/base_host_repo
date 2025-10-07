@@ -49,7 +49,6 @@ build {
 
   provisioner "shell" {
   scripts = [
-    "scripts/dkms.sh",
     "scripts/network.sh",
     "scripts/consul.sh",
     "scripts/postgresql.sh",
