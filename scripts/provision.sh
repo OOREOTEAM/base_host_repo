@@ -3,9 +3,9 @@
 KEYS_DIR="/home/ubuntu/vm_keys"
 AUTHORIZED_KEYS="/home/ubuntu/.ssh/authorized_keys"
 
-sudo mkdir -p /home/ubuntu/.ssh
+mkdir -p /home/ubuntu/.ssh
 AUTHORIZED_KEYS="/home/ubuntu/.ssh/authorized_keys"
-sudo chmod 600 "$AUTHORIZED_KEYS"
+chmod 600 "$AUTHORIZED_KEYS"
 
 for key in "$KEYS_DIR"/*; do
   if [ -f "$key" ]; then
@@ -13,4 +13,4 @@ for key in "$KEYS_DIR"/*; do
   fi
 done
 
-sudo chown ubuntu:ubuntu "$AUTHORIZED_KEYS"
+chown ubuntu:ubuntu "$AUTHORIZED_KEYS"

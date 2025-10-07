@@ -1,9 +1,12 @@
 #!/bin/bash
 
-sudo snap install amazon-ssm-agent --classic
 
-sudo snap list amazon-ssm-agent
+apt-get install -y --no-install-recommends snapd
 
-sudo snap start amazon-ssm-agent
+snap install amazon-ssm-agent --classic
 
-sudo snap services amazon-ssm-agent
+snap list amazon-ssm-agent
+
+snap start amazon-ssm-agent
+
+snap services amazon-ssm-agent

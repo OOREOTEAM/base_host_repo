@@ -48,15 +48,16 @@ build {
   }
 
   provisioner "shell" {
-    scripts = [
-      "scripts/dkms.sh",
-      "scripts/network.sh",
-      "scripts/postgresql.sh",
-      "scripts/provision.sh",
-      "scripts/ssmInstall.sh",
-      "scripts/consul.sh"
-    ]
-  }
+  scripts = [
+    "scripts/dkms.sh",
+    "scripts/network.sh",
+    "scripts/consul.sh",
+    "scripts/postgresql.sh",
+    "scripts/ssmInstall.sh",
+    "scripts/provision.sh",
+  ]
+  execute_command = "sudo -E bash '{{ .Path }}'"
+}
 
   provisioner "shell" {
     inline = ["echo This provisioner runs last"]
