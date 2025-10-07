@@ -34,12 +34,6 @@ source "amazon-ebs" "ubuntu" {
     owners      = ["099720109477"]
   }
   ssh_username = "ubuntu"
-  launch_block_device_mappings {
-    device_name = "/dev/sda1"
-    volume_size = 12
-    volume_type = "gp3"
-    delete_on_termination = true
-  }
 }
 
 build {
@@ -57,9 +51,10 @@ build {
     scripts = [
       "scripts/dkms.sh",
       "scripts/network.sh",
+      "scripts/postgresql.sh",
       "scripts/provision.sh",
       "scripts/ssmInstall.sh",
-      "scripts/postgresql.sh"
+      "scripts/consul.sh"
     ]
   }
 
@@ -68,9 +63,3 @@ build {
   }
 
 }
-
-
-
-
-
-

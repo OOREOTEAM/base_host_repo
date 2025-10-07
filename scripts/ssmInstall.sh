@@ -1,5 +1,4 @@
 #!/bin/bash
-sudo apt update
 
 sudo snap install amazon-ssm-agent --classic
 
