@@ -1,0 +1,44 @@
+pipeline {
+  agent any
+
+  environment {
+    AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
+    AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
+    AWS_DEFAULT_REGION    = 'eu-central-1'
+  }
+
+  stages {
+    stage('Clean workspace') {
+      steps { deleteDir() }
+    }
+
+    stage('Clone repo via SSH') {
+      steps {
+        dir('packer-oreo') {
+          git branch: 'OREO-49-create-packer-imager-and-publish-it-to-amazon-via-jenkins',
+              url: 'git@github.com:OOREOTEAM/base_host_repo.git',
+              credentialsId: '92ebdc9b-acc7-462a-b02d-abe695f18c40'
+        }
+      }
+    }
+
+    stage('Packer build') {
+      steps {
+        dir('packer-oreo') {
+          sh '''
+            set -euo pipefail
+
+            PACKER_FILE="${PACKER_FILE:-template/amazon-oreo.pkr.hcl}"
+
+            command -v packer >/dev/null 2>&1 || { echo "Packer not installed on agent"; exit 1; }
+            [ -f "$PACKER_FILE" ] || { echo "No such file: $PACKER_FILE"; exit 1; }
+
+            packer init "$PACKER_FILE"
+            packer validate "$PACKER_FILE"
+            packer build -color=false -on-error=abort "$PACKER_FILE"
+          '''
+        }
+      }
+    }
+  }
+}
