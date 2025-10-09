@@ -17,11 +17,12 @@ variable "ami_prefix" {
 }
 
 locals {
-  timestamp = regex_replace(timestamp(), "[- TZ:]", "")
+  build_time = formatdate("YYYY-MM-DD-hh-mm", timestamp())
 }
 
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "${var.ami_prefix}-${local.timestamp}"
+  name        = "image ${var.ami_prefix} ${local.build_time}"
+  ami_name    = "${var.ami_prefix}-${local.build_time}"
   instance_type = "t3.micro"
   region        = "eu-central-1"
   source_ami_filter {
