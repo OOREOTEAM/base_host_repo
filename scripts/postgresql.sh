@@ -2,7 +2,7 @@
 
 set -eu
 
-apt install -y wget gnupg2 lsb-release vim-tiny
+apt install -y wget gnupg2 lsb-release 
 
 
 wget -qO - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
