@@ -14,3 +14,5 @@ for key in "$KEYS_DIR"/*; do
 done
 
 chown ubuntu:ubuntu "$AUTHORIZED_KEYS"
+
+sudo apt-get install python3-psycopg2

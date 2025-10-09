@@ -1,6 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
+set -euo pipefail
+export DEBIAN_FRONTEND=noninteractive
 
-apt install -y iproute2 iputils-ping dnsutils netcat-openbsd tcpdump net-tools htop iotop sysstat
-
-apt install -y openssh-server
+apt-get update -y
+apt-get install -y \
+  iputils-ping \
+  bind9-dnsutils \
+  netcat-openbsd \
+  tcpdump \
+  net-tools \
+  iotop \
+  sysstat
