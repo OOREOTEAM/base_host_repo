@@ -21,7 +21,6 @@ locals {
 }
 
 source "amazon-ebs" "ubuntu" {
-  name        = "image ${var.ami_prefix} ${local.build_time}"
   ami_name    = "${var.ami_prefix}-${local.build_time}"
   instance_type = "t3.micro"
   region        = "eu-central-1"
