@@ -49,6 +49,7 @@ build {
 
   provisioner "shell" {
   scripts = [
+    "scripts/apt-prepare.sh",
     "scripts/network.sh",
     "scripts/consul.sh",
     "scripts/postgresql.sh",

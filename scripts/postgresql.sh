@@ -1,6 +1,7 @@
 #!/bin/bash
 
-set -eu
+set -euo pipefail
+export DEBIAN_FRONTEND=noninteractive
 
 apt install -y wget gnupg2 lsb-release 
 

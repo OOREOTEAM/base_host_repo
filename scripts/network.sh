@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
-
 set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 
 apt-get update -y
-apt-get install -y \
+apt-get install -y --no-install-recommends \
   iputils-ping \
   bind9-dnsutils \
   netcat-openbsd \
