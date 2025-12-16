@@ -1,0 +1,29 @@
+pipeline {
+  agent any
+
+  environment {
+    AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
+    AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
+    AWS_DEFAULT_REGION    = 'eu-central-1'
+  }
+
+  stages {
+  
+    stage('Packer build') {
+      steps {
+        sh '''
+          set -euo pipefail
+
+          PACKER_FILE="${PACKER_FILE:-template/amazon-oreo.pkr.hcl}"
+
+          command -v packer >/dev/null 2>&1 || { echo "Packer not installed on agent"; exit 1; }
+          [ -f "$PACKER_FILE" ] || { echo "No such file: $PACKER_FILE"; exit 1; }
+
+          packer init "$PACKER_FILE"
+          packer validate "$PACKER_FILE"
+          packer build -color=false -on-error=abort "$PACKER_FILE"
+        '''
+      }
+    }
+  }
+}
